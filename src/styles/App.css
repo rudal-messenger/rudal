@@ -1,0 +1,76 @@
+:root {
+  --bg:#eef2f5;
+  --accent:#0b83d6;
+  --panel:#ffffff;
+  --muted:#8897a1;
+  --bubble-you:#ffffff;
+  --bubble-me:#0780d6;
+}
+
+*{box-sizing:border-box;font-family:"Segoe UI", Roboto, system-ui, -apple-system, sans-serif}
+html,body,#root{height:100%;margin:0;background:var(--bg)}
+
+/* main shell */
+.app-shell{display:grid;grid-template-columns:320px 1fr 360px;height:100vh;gap:0}
+
+/* left column */
+.left-col{background:#f7f8fa;border-right:1px solid #e6ebef;display:flex;flex-direction:column}
+.brand-strip{display:flex;align-items:center;gap:12px;padding:18px;border-bottom:1px solid #e6ebef;background:linear-gradient(90deg,#f9fbfc,#f7f8fa)}
+.brand-logo{width:46px;height:46px;border-radius:10px}
+.brand-title{font-size:20px;color:var(--accent);font-weight:600}
+
+.contacts-pane{display:flex;flex-direction:column;height:100%}
+.profile-top{padding:12px;border-bottom:1px solid #e6ebef}
+.me{display:flex;gap:12px;align-items:center}
+.avatar{width:56px;height:56px;border-radius:12px;background:linear-gradient(180deg,#dbeeff,#c6e6ff);display:flex;align-items:center;justify-content:center;font-weight:700;color:#045a8b}
+.me-name{font-weight:700;font-size:16px}
+.me-status{color:var(--muted);font-size:13px}
+
+.contacts-search{padding:12px}
+.contacts-search input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #e6eef9;background:#fff}
+
+.contacts-list{overflow:auto;padding:8px;display:flex;flex-direction:column;gap:6px}
+.contact-row{display:flex;align-items:center;gap:10px;padding:10px;border-radius:8px;cursor:pointer;transition:background .12s}
+.contact-row:hover{background:#f1f7ff}
+.contact-meta{flex:1;min-width:0}
+.contact-name{font-weight:600;color:#102233}
+.contact-last{color:var(--muted);font-size:12px;margin-top:4px}
+.presence{width:10px;height:10px;border-radius:50%;margin-left:8px}
+.presence.available{background:#22c55e}
+.presence.away{background:#f59e0b}
+.presence.busy{background:#ef4444}
+.presence.offline{background:#cbd5e1}
+
+/* center column */
+.center-col{background:linear-gradient(#ffffff,#fbfdff);display:flex;flex-direction:column}
+.chat-pane{display:flex;flex-direction:column;height:100%}
+.chat-header{padding:18px;border-bottom:1px solid #eef4fb;display:flex;justify-content:space-between;align-items:center}
+.chat-title{font-weight:700;font-size:18px;color:#102233}
+.chat-body{flex:1;padding:40px 60px;overflow:auto;position:relative}
+
+/* messages */
+.msg-row{margin-bottom:18px;max-width:60%;display:block}
+.msg-row.mine{margin-left:auto;text-align:right}
+.bubble{display:inline-block;padding:14px 18px;border-radius:8px;background:var(--bubble-you);position:relative;color:#102233;box-shadow:0 2px 0 rgba(0,0,0,0.02)}
+.msg-row.mine .bubble{background:var(--bubble-me);color:white}
+.msg-row .bubble::after{content:"";position:absolute;left:8px;bottom:-8px;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:8px solid var(--bubble-you)}
+.msg-row.mine .bubble::after{right:8px;left:auto;border-top-color:var(--bubble-me)}
+
+.chat-composer{padding:18px 40px;border-top:1px solid #eef4fb;display:flex;gap:12px;align-items:center}
+.chat-composer input{flex:1;padding:14px;border-radius:8px;border:1px solid #e6eef9;font-size:16px}
+.send{background:var(--accent);color:white;border:none;padding:12px 18px;border-radius:8px;cursor:pointer}
+
+/* right column */
+.right-col{background:#fff;border-left:1px solid #e6ebef;padding:18px;display:flex;flex-direction:column}
+.call-panel{flex:1;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.call-placeholder{color:var(--muted);text-align:center;padding:30px}
+.in-call{display:flex;flex-direction:column;gap:12px;align-items:center}
+.audio-info{display:flex;flex-direction:column;align-items:center}
+.big-avatar{width:88px;height:88px;border-radius:14px;background:var(--accent);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:28px}
+.call-controls{display:flex;gap:8px;margin-top:12px}
+.control.hang{background:#e74c3c;color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+.call-btn{background:#0b83d6;color:white;border:none;padding:8px 12px;border-radius:6px;cursor:pointer}
+.empty-state{padding:40px;color:var(--muted);font-size:18px;text-align:center}
+
+/* loading */
+.loading-screen{display:flex;align-items:center;justify-content:center;height:100vh;font-size:18px;color:var(--muted)}

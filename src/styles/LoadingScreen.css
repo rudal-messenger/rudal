@@ -1,0 +1,35 @@
+.rudal-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #f7f7f8, #f6f7f7);
+  color: #fff;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.rudal-logo img {
+  width: 140px;
+  height: auto;
+  margin-bottom: 30px;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25));
+
+  transform: translateX(-32px);
+}
+
+/* Loading circle */
+.loading-spinner {
+  border: 4px solid #DBF4FD;
+  border-top: 4px solid #43cdff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

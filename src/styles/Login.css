@@ -1,0 +1,261 @@
+/* Rudal login — Microsoft-ish look */
+
+.ms-wrap{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+
+  /* background image + soft overlay */
+  background-image:
+    linear-gradient(rgba(243,243,243,0.55), rgba(243,243,243,0.55)),
+    url("../assets/login-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  padding: 28px 14px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:#1f1f1f;
+}
+
+.ms-shell{
+  width: 100%;
+  max-width: 520px; /* ← bigger */
+  display:grid;
+  gap: 18px;
+}
+
+
+.ms-card{
+  background: rgba(255,255,255,0.90);
+  border: 1px solid rgba(230,230,230,0.85);
+  box-shadow: 0 10px 30px rgba(0,0,0,.12);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 36px 40px;
+}
+
+.ms-brand{
+  display:flex;
+  align-items:center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.ms-logo{
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+
+.ms-brandtext{
+  display:flex;
+  flex-direction:column;
+  line-height: 1.05;
+}
+.ms-appname{ font-weight: 700; }
+.ms-sub{ font-size: 12px; color:#6b6b6b; margin-top: 2px; }
+
+.ms-title{
+  font-size: 24px;
+  font-weight: 650;
+  margin: 10px 0 14px;
+}
+
+.ms-error{
+  border: 1px solid #f3c6c6;
+  background: #fff4f4;
+  color: #8a1f1f;
+  padding: 10px 12px;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.ms-form{
+  display:grid;
+  gap: 18px;
+}
+
+.ms-field{
+  display:grid;
+  gap: 8px;
+}
+
+.ms-label{
+  font-size: 13px;
+  color: #2b2b2b;
+}
+
+.ms-input{
+  width:100%;
+  height: 42px;
+  padding: 7px 10px;
+  border: 1px solid #c8c8c8;
+  outline: none;
+  border-radius: 0;
+  font-size: 15px;
+  background: #fff;
+}
+
+.ms-input:focus{
+  border-color:#0078d4;
+  box-shadow: 0 0 0 1px #0078d4 inset;
+}
+
+.ms-links{
+  display:flex;
+  justify-content:flex-start;
+  margin-top: -2px;
+}
+
+.ms-links.bottom{
+  margin-top: 8px;
+}
+
+.ms-link{
+  appearance:none;
+  border:none;
+  background:transparent;
+  padding:0;
+  color:#0078d4;
+  cursor:pointer;
+  font-size: 13px;
+  text-align:left;
+}
+
+.ms-link:hover{
+  text-decoration: underline;
+}
+
+.ms-small{ font-size: 12px; }
+
+.ms-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.ms-btn{
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 0;
+  border: 1px solid transparent;
+  cursor:pointer;
+  font-size: 13px;
+}
+
+.ms-btn-primary{
+  background:#0078d4;
+  border-color:#0078d4;
+  color:#fff;
+}
+
+.ms-btn-primary:hover{ filter: brightness(0.96); }
+
+.ms-btn-secondary{
+  background:#f5f5f5;
+  border-color:#d0d0d0;
+  color:#1f1f1f;
+}
+
+.ms-btn-secondary:hover{ background:#ededed; }
+
+.ms-btn:disabled{
+  opacity: .65;
+  cursor: not-allowed;
+}
+
+.ms-identityRow{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  padding: 6px 0 2px;
+}
+
+.ms-backBtn{
+  width: 34px;
+  height: 34px;
+  border: 1px solid #d0d0d0;
+  background:#f5f5f5;
+  cursor:pointer;
+  font-size: 16px;
+}
+
+.ms-backBtn:hover{ background:#ededed; }
+
+.ms-identityText{
+  display:flex;
+  flex-direction:column;
+  gap: 2px;
+}
+
+.ms-identityEmail{
+  font-size: 13px;
+  color:#3a3a3a;
+}
+
+/* Footer */
+.ms-footer{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap: 8px;
+  font-size: 12px;
+  color:#6b6b6b;
+}
+
+.ms-dot{ color:#b3b3b3; }
+
+/* --- Microsoft-ish step swoosh --- */
+
+.ms-stage{
+  position: relative;
+  overflow: hidden;
+}
+
+.ms-panel{
+  width: 100%;
+  height: auto;
+  will-change: transform, opacity;
+}
+
+.ms-in{
+  animation-duration: 220ms;
+  animation-timing-function: cubic-bezier(.2,.9,.2,1);
+  animation-fill-mode: both;
+}
+
+.ms-forward{ animation-name: msSlideLeftIn; }
+.ms-backward{ animation-name: msSlideRightIn; }
+
+@keyframes msSlideLeftIn{
+  from{ opacity:0; transform: translateX(22px); }
+  to{ opacity:1; transform: translateX(0); }
+}
+
+@keyframes msSlideRightIn{
+  from{ opacity:0; transform: translateX(-22px); }
+  to{ opacity:1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .ms-in{ animation: none !important; }
+}
+
+.ms-help{
+  font-size: 13px;
+  color: #6b6b6b;
+  margin-top: 6px;
+  margin-bottom: 20px;
+}
+
+.ms-helpLink{
+  color:#0078d4;
+  text-decoration:none;
+}
+
+.ms-helpLink:hover{
+  text-decoration: underline;
+}
