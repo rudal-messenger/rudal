@@ -1,0 +1,65 @@
+name: Deploy Rudal
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+
+      - name: Find app folder
+        id: app
+        shell: bash
+        run: |
+          if [ -f client/package.json ]; then
+            echo "dir=client" >> "$GITHUB_OUTPUT"
+          elif [ -f package.json ]; then
+            echo "dir=." >> "$GITHUB_OUTPUT"
+          else
+            echo "package.json not found"
+            exit 1
+          fi
+
+      - name: Install dependencies
+        working-directory: ${{ steps.app.outputs.dir }}
+        run: npm ci
+
+      - name: Build Rudal
+        working-directory: ${{ steps.app.outputs.dir }}
+        run: npm run build
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload website
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ${{ steps.app.outputs.dir }}/dist
+
+      - name: Deploy website
+        id: deployment
+        uses: actions/deploy-pages@v4
