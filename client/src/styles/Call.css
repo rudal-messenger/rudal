@@ -1,0 +1,241 @@
+.call-panel {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+}
+.remote-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.local-video {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 200px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.35);
+}
+.end-call {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.incoming-call-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.incoming-call-box {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,.3);
+}
+
+.incoming-call-actions button {
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.accept { background: #22c55e; color: white; }
+.decline { background: #ef4444; color: white; }
+.ignore { background: #9ca3af; color: white; }
+
+.incoming-call-overlay {
+  position: fixed; inset: 0; z-index: 999;
+  background: rgba(0,0,0,.5);
+  display: flex; align-items: center; justify-content: center;
+}
+.incoming-call-box {
+  background: #fff; padding: 24px 28px; border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.25);
+  text-align: center; min-width: 280px;
+}
+.incoming-call-actions button {
+  margin: 8px; padding: 10px 16px; border: 0; border-radius: 999px;
+  cursor: pointer; font-weight: 600;
+}
+.accept { background: #22c55e; color: #fff; }
+.decline { background: #ef4444; color: #fff; }
+.ignore { background: #9ca3af; color: #fff; }
+
+.incoming-call-popup {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 260px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+  overflow: hidden;
+  animation: fadeIn 0.3s ease;
+  z-index: 9999;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.popup-header {
+  background: #0078d7;
+  color: white;
+  font-weight: 600;
+  padding: 10px;
+  text-align: center;
+}
+
+.popup-body {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.popup-avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.popup-name {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.popup-buttons {
+  margin-top: 6px;
+  display: flex;
+  gap: 6px;
+}
+
+.accept-btn,
+.decline-btn {
+  border: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: white;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.accept-btn {
+  background: #28a745;
+}
+.accept-btn:hover {
+  background: #23923c;
+}
+.decline-btn {
+  background: #dc3545;
+}
+.decline-btn:hover {
+  background: #c12f3e;
+}
+
+body.dark-mode .incoming-call-popup {
+  background: #2c2c2c;
+  color: white;
+}
+body.dark-mode .popup-header {
+  background: #3399ff;
+}
+
+.incoming-call-popup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.2);
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+  width: 280px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.incoming-call-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.caller-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.caller-info h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.call-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.call-actions button {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.call-actions .accept {
+  background: #2ecc71;
+  color: #fff;
+}
+.call-actions .accept:hover { background: #27ae60; }
+
+.call-actions .decline {
+  background: #e74c3c;
+  color: #fff;
+}
+.call-actions .decline:hover { background: #c0392b; }
+
+.call-actions .ignore {
+  background: #bdc3c7;
+  color: #2c3e50;
+}
+.call-actions .ignore:hover { background: #95a5a6; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

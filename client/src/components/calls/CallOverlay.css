@@ -1,0 +1,614 @@
+.rudal-call-screen{
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: radial-gradient(1200px 800px at 50% 30%, #2b2b2b 0%, #0b0b0b 55%, #050505 100%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.rudal-call-top{
+  height: 64px;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  padding: 14px 18px;
+}
+
+.rudal-call-title{
+  display:flex;
+  flex-direction:column;
+  gap: 2px;
+}
+.rudal-call-name{ font-size: 16px; font-weight: 700; opacity: .95; }
+.rudal-call-sub{ font-size: 12px; opacity: .75; }
+
+.rudal-call-top-actions{
+  display:flex;
+  gap: 10px;
+}
+.rudal-icon-btn{
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color: #fff;
+  cursor: pointer;
+}
+.rudal-icon-btn:hover{ background: rgba(255,255,255,.10); }
+
+.rudal-call-center{
+  flex: 1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap: 14px;
+  text-align:center;
+  padding: 12px;
+}
+
+.rudal-avatar-wrap{
+  width: 280px;
+  height: 280px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.06);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow: 0 18px 60px rgba(0,0,0,.55);
+}
+.rudal-avatar{
+  width: 140px;
+  height: 140px;
+  border-radius: 999px;
+  object-fit: cover;
+  opacity: .9;
+}
+
+.rudal-center-name{
+  font-size: 18px;
+  font-weight: 700;
+  opacity: .95;
+}
+.rudal-center-hint{
+  font-size: 12px;
+  opacity: .75;
+}
+
+.rudal-call-bottom{
+  padding: 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 14px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.rudal-round-btn{
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.07);
+  color: #fff;
+  cursor:pointer;
+}
+.rudal-round-btn:hover{ background: rgba(255,255,255,.11); }
+
+.rudal-hangup-btn{
+  width: 62px;
+  height: 62px;
+  border-radius: 999px;
+  border: 0;
+  background: #e31b23;
+  color: #fff;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 20px;
+  box-shadow: 0 12px 30px rgba(227,27,35,.35);
+}
+.rudal-hangup-btn:hover{ filter: brightness(1.05); }
+
+.rudal-incoming-actions{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 86px;
+  display:flex;
+  gap: 10px;
+}
+
+.rudal-accept-pill, .rudal-ignore-pill{
+  border-radius: 999px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255,255,255,.14);
+  cursor:pointer;
+  color:#fff;
+  font-weight: 600;
+}
+.rudal-accept-pill{ background: rgba(34,197,94,.16); }
+.rudal-ignore-pill{ background: rgba(255,255,255,.08); }
+.rudal-accept-pill:hover, .rudal-ignore-pill:hover{ background: rgba(255,255,255,.12); }
+
+.rudal-round-btn.is-off {
+  opacity: .6;
+  filter: grayscale(1);
+}
+
+/* speaker picker */
+.rudal-speaker-sheet{
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,.55);
+}
+
+.rudal-speaker-card{
+  width: 360px;
+  border-radius: 16px;
+  background: rgba(20,20,20,.96);
+  border: 1px solid rgba(255,255,255,.12);
+  padding: 14px;
+}
+
+.rudal-speaker-title{
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.rudal-speaker-row{
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+.rudal-speaker-row.active{
+  background: rgba(255,255,255,.12);
+}
+
+.rudal-speaker-close{
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.10);
+  color:#fff;
+  cursor:pointer;
+}
+.rudal-decline-pill{
+  border-radius: 999px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255,255,255,.14);
+  cursor:pointer;
+  color:#fff;
+  font-weight: 600;
+  background: rgba(227,27,35,.18);
+}
+
+.remote-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: black;
+}
+
+.local-video {
+  position: fixed;
+  bottom: 120px;
+  right: 30px;
+  width: 220px;
+  height: 140px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.25);
+}
+
+.call-overlay {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: white;
+  z-index: 10;
+}
+
+.call-name {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.call-timer {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Blue call interface */
+.rudal-call-screen {
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(
+    170deg,
+    #009bb8 0%,
+    #0086b5 40%,
+    #0064ac 100%
+  );
+  font-family: inherit;
+}
+
+/* Keep video behind the call controls */
+.rudal-call-screen .remote-video {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: transparent;
+  pointer-events: none;
+}
+
+.rudal-call-screen .rudal-call-top {
+  position: relative;
+  z-index: 3;
+  flex-shrink: 0;
+  height: auto;
+  min-height: 76px;
+  box-sizing: border-box;
+  padding: 20px 28px;
+  background: transparent;
+}
+
+.rudal-call-screen .rudal-call-title {
+  gap: 5px;
+}
+
+.rudal-call-screen .rudal-call-name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.rudal-call-screen .rudal-call-sub {
+  font-size: 13px;
+  opacity: 0.85;
+  font-variant-numeric: tabular-nums;
+}
+
+.rudal-call-screen .rudal-icon-btn {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: rgba(0, 44, 70, 0.35);
+  font-size: 24px;
+}
+
+.rudal-call-screen .rudal-call-center {
+  flex: 1;
+  min-height: 0;
+  gap: 12px;
+  padding: 24px;
+}
+
+/* Visible behind the remote video when no video is playing */
+.rudal-call-screen .rudal-call-profile {
+  position: relative;
+  z-index: 0;
+  width: clamp(110px, 15vw, 180px);
+  height: clamp(110px, 15vw, 180px);
+  flex-shrink: 0;
+  margin-bottom: 12px;
+  object-fit: cover;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 12px 40px rgba(0, 55, 100, 0.16);
+}
+
+.rudal-call-screen .rudal-center-name,
+.rudal-call-screen .rudal-center-hint {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-shadow: 0 1px 8px rgba(0, 40, 70, 0.25);
+}
+
+.rudal-call-screen .rudal-center-name {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.rudal-call-screen .rudal-center-hint {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+/* Floating camera preview */
+.rudal-call-screen .local-video {
+  position: absolute;
+  z-index: 4;
+  top: 90px;
+  right: 28px;
+  bottom: auto;
+  width: clamp(130px, 20vw, 240px);
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.65);
+  border-radius: 14px;
+  background: rgba(0, 44, 70, 0.25);
+  box-shadow: 0 8px 30px rgba(0, 40, 70, 0.2);
+}
+
+/* Bottom controls */
+.rudal-call-screen .rudal-call-bottom {
+  position: relative;
+  z-index: 3;
+  flex-shrink: 0;
+  gap: 16px;
+  padding: 24px 20px max(28px, env(safe-area-inset-bottom));
+  background: transparent;
+}
+
+.rudal-call-screen .rudal-round-btn,
+.rudal-call-screen .rudal-hangup-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  font-size: 22px;
+  transition: transform 150ms ease, background 150ms ease;
+}
+
+.rudal-call-screen .rudal-round-btn {
+  background: white;
+  color: #16475c;
+  box-shadow: 0 4px 14px rgba(0, 45, 80, 0.12);
+}
+
+.rudal-call-screen .rudal-round-btn.is-off {
+  background: #16475c;
+  color: white;
+  opacity: 1;
+  filter: none;
+}
+
+.rudal-call-screen .rudal-hangup-btn {
+  background: #fa454b;
+  color: white;
+  box-shadow: 0 4px 16px rgba(140, 20, 30, 0.2);
+}
+
+.rudal-call-screen .rudal-round-btn:hover:not(:disabled),
+.rudal-call-screen .rudal-hangup-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+}
+
+.rudal-call-screen .rudal-round-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.rudal-call-screen button:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 4px;
+}
+
+/* Incoming call actions remain available */
+.rudal-call-screen .rudal-incoming-actions {
+  bottom: 104px;
+  width: max-content;
+  max-width: calc(100vw - 24px);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.rudal-call-screen .rudal-accept-pill {
+  background: #16834a;
+}
+
+.rudal-call-screen .rudal-ignore-pill {
+  background: #16475c;
+}
+
+.rudal-call-screen .rudal-decline-pill {
+  background: #d93440;
+}
+
+/* Speaker selection stays above the call */
+.rudal-call-screen .rudal-speaker-sheet {
+  z-index: 10;
+}
+
+.rudal-call-screen .rudal-speaker-card {
+  width: min(360px, calc(100vw - 48px));
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .rudal-call-screen .rudal-call-top {
+    padding: 16px;
+  }
+
+  .rudal-call-screen .local-video {
+    top: 88px;
+    right: 16px;
+    width: 120px;
+  }
+
+  .rudal-call-screen .rudal-call-bottom {
+    gap: 12px;
+  }
+
+  .rudal-call-screen .rudal-round-btn,
+  .rudal-call-screen .rudal-hangup-btn {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* Keep audio playing while hiding the disabled camera's black frames. */
+.rudal-call-screen .remote-video {
+  opacity: 0;
+}
+
+.rudal-call-screen.has-remote-video .remote-video {
+  opacity: 1;
+}
+
+/* Hide the large central information during incoming video. */
+.rudal-call-screen.has-remote-video .rudal-call-profile,
+.rudal-call-screen.has-remote-video .rudal-center-name,
+.rudal-call-screen.has-remote-video .rudal-center-hint {
+  visibility: hidden;
+}
+
+/* Floating call window */
+.rudal-call-screen.is-minimized {
+  inset: auto 20px 20px auto;
+  width: min(340px, calc(100vw - 32px));
+  height: 240px;
+  max-height: calc(100dvh - 32px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.3);
+}
+
+.rudal-call-screen .rudal-call-size-btn {
+  font-size: 24px;
+}
+
+/* Compact header with expand button */
+.rudal-call-screen.is-minimized .rudal-call-top {
+  min-height: 0;
+  padding: 12px;
+  gap: 10px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4),
+    transparent
+  );
+}
+
+.rudal-call-screen.is-minimized .rudal-call-title {
+  min-width: 0;
+}
+
+.rudal-call-screen.is-minimized .rudal-call-name {
+  max-width: 210px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 14px;
+}
+
+.rudal-call-screen.is-minimized .rudal-call-sub {
+  font-size: 11px;
+}
+
+.rudal-call-screen.is-minimized .rudal-call-top-actions {
+  margin-left: auto;
+}
+
+.rudal-call-screen.is-minimized
+  .rudal-call-top-actions
+  > button:not(.rudal-call-size-btn) {
+  display: none;
+}
+
+.rudal-call-screen.is-minimized .rudal-call-size-btn {
+  width: 34px;
+  height: 34px;
+}
+
+/* Keep the remote video mounted and playing */
+.rudal-call-screen.is-minimized .remote-video {
+  object-fit: cover;
+}
+
+.rudal-call-screen.is-minimized .rudal-call-center {
+  padding: 0;
+  gap: 0;
+}
+
+.rudal-call-screen.is-minimized .rudal-call-profile {
+  width: 72px;
+  height: 72px;
+  margin: 0;
+}
+
+.rudal-call-screen.is-minimized .rudal-center-name,
+.rudal-call-screen.is-minimized .rudal-center-hint,
+.rudal-call-screen.is-minimized .local-video {
+  display: none !important;
+}
+
+/* Only the end-call control stays in the bottom bar */
+.rudal-call-screen.is-minimized .rudal-call-bottom {
+  padding: 10px;
+  gap: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.35),
+    transparent
+  );
+}
+
+.rudal-call-screen.is-minimized
+  .rudal-call-bottom
+  > .rudal-round-btn {
+  display: none;
+}
+
+.rudal-call-screen.is-minimized .rudal-hangup-btn {
+  width: 42px;
+  height: 42px;
+  font-size: 18px;
+}
+
+@media (max-width: 600px) {
+  .rudal-call-screen.is-minimized {
+    right: 16px;
+    bottom: 16px;
+  }
+}
+
+.rudal-call-screen.is-minimized .rudal-call-top {
+  position: relative;
+  align-items: flex-start;
+  padding: 12px;
+}
+
+.rudal-call-screen.is-minimized .rudal-call-title {
+  padding-right: 44px;
+}
+
+.rudal-call-screen.is-minimized .rudal-call-top-actions {
+  position: static;
+}
+
+.rudal-call-screen.is-minimized .rudal-call-size-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 5;
+  margin: 0;
+}
