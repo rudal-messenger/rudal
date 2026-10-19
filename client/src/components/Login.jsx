@@ -91,6 +91,16 @@ export default function Login() {
 
         if (profileError) throw profileError;
 
+        if (
+  !profile.encrypted_master_key ||
+  !profile.master_key_iv ||
+  !profile.master_key_salt
+) {
+  throw new Error(
+    "Your encrypted master-key backup is missing or incomplete. Open Rudal on a device where your messages are still readable. No keys have been replaced."
+  );
+}
+
         if (profile.encrypted_master_key) {
           if (
             !profile.master_key_iv ||

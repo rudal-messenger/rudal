@@ -3,6 +3,7 @@ import { supabase } from "../supabaseClient";
 import Login from "./Login";
 import "../styles/AccountSetup.css";
 import LoadingScreen from "./LoadingScreen";
+import { ensureE2EEIdentity } from "../utils/e2ee";
 
 const BASE = import.meta.env.BASE_URL || "/";
 
@@ -439,7 +440,7 @@ export default function AccountSetupGate({
         supabase
           .from("profiles")
           .select(
-            "id, username, avatar, rudal_number, rudal_country_code, encrypted_master_key"
+            "id, username, avatar, rudal_number, rudal_country_code, encrypted_master_key, master_key_iv, master_key_salt"
           )
           .eq("id", uid)
           .single(),
@@ -463,14 +464,42 @@ export default function AccountSetupGate({
         if (result.error) throw result.error;
       }
 
-      if (
-        profileResult.data.encrypted_master_key &&
-        !sessionStorage.getItem(
-          `rudal_master_key_${uid}`
-        )
-      ) {
-        return { phase: "unlock" };
-      }
+      const profile = profileResult.data;
+
+const hasMasterKey = !!sessionStorage.getItem(
+  `rudal_master_key_${uid}`
+);
+
+const hasMasterBackup = !!(
+  profile.encrypted_master_key &&
+  profile.master_key_iv &&
+  profile.master_key_salt
+);
+
+if (!hasMasterKey) {
+  if (!hasMasterBackup) {
+    throw new Error(
+      "Your encrypted master-key backup is missing or incomplete. Open Rudal on a device where your messages are still readable. No keys have been replaced."
+    );
+  }
+
+  return { phase: "unlock" };
+}
+
+// Only allow chats to load after identity initialization succeeds.
+try {
+  await ensureE2EEIdentity(uid);
+} catch (error) {
+  if (
+    error.message === "E2EE_RECOVERY_BACKUP_MISSING"
+  ) {
+    throw new Error(
+      "Your encrypted identity backup is missing. Open Rudal on a device where your messages are still readable to back up the existing identity."
+    );
+  }
+
+  throw error;
+}
 
       if (setupResult.data?.tour_completed_at) {
         return { phase: "ready" };
