@@ -201,6 +201,46 @@ useEffect(() => {
 
 
 
+useEffect(() => {
+  const viewport = window.visualViewport;
+  if (!viewport) return;
+
+  const updateKeyboardViewport = () => {
+    const shell = document.querySelector(".rudal-shell");
+
+    if (!shell || window.innerWidth > 760) return;
+
+    // Only resize the chat view when a chat is open
+    if (!shell.classList.contains("mobile-chat-open")) {
+      shell.style.removeProperty("--chat-viewport-height");
+      shell.style.removeProperty("--chat-viewport-top");
+      return;
+    }
+
+    shell.style.setProperty(
+      "--chat-viewport-height",
+      `${viewport.height}px`
+    );
+
+    shell.style.setProperty(
+      "--chat-viewport-top",
+      `${viewport.offsetTop}px`
+    );
+  };
+
+  updateKeyboardViewport();
+
+  viewport.addEventListener("resize", updateKeyboardViewport);
+  viewport.addEventListener("scroll", updateKeyboardViewport);
+  window.addEventListener("resize", updateKeyboardViewport);
+
+  return () => {
+    viewport.removeEventListener("resize", updateKeyboardViewport);
+    viewport.removeEventListener("scroll", updateKeyboardViewport);
+    window.removeEventListener("resize", updateKeyboardViewport);
+  };
+}, []);
+
 
 
   useEffect(() => {
