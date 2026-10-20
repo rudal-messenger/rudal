@@ -3417,3 +3417,12 @@ body.dark-mode .settings-sidebar button.active {
     cursor: pointer;
   }
 }
+
+
+@media (max-width: 760px) {
+  .mobile-nav-button:nth-child(3) img,
+  .mobile-nav-button:nth-child(4) img {
+    transform: scale(1.8);
+    object-fit: contain;
+  }
+}
