@@ -14,6 +14,9 @@ import mutedMicIcon from "../../assets/tabs/mic_off.png";
 import micIcon from "../../assets/tabs/mic_on.png";
 import noSpeakerIcon from "../../assets/tabs/no_speaker.png";
 import speakerIcon from "../../assets/tabs/speaker.png";
+import screenShareOffIcon from "../../assets/tabs/screenshare_off.png";
+import screenShareOnIcon from "../../assets/tabs/screenshare_on.png";
+
 
 
 
@@ -660,8 +663,7 @@ const startScreenShare = async () => {
     className="rudal-control-icon"
   />
 </button>
-
-
+ 
 {callPhase === "in_call" && (
   <button
     type="button"
@@ -679,11 +681,11 @@ const startScreenShare = async () => {
     aria-label={isScreenSharing ? "Stop sharing" : "Share screen"}
     aria-pressed={isScreenSharing}
   >
-    {isScreenSharing ? (
-      <icon-placeholder />
-    ) : (
-      <icon-placeholder />
-    )}
+    <img
+      src={isScreenSharing ? screenShareOnIcon : screenShareOffIcon}
+      alt=""
+      className="rudal-control-icon"
+    />
   </button>
 )}
 
