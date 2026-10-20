@@ -10,7 +10,7 @@ import { supabase } from "../../supabaseClient";
 import hangupIcon from "../../assets/tabs/hangup_phone.png";
 import cameraIcon from "../../assets/tabs/camera_on.png";
 import cameraIconSelected from "../../assets/tabs/camera_off.png";
-import mutedMicIcon from "../../assets/tabs/mic_moff.png";
+import mutedMicIcon from "../../assets/tabs/mic_off.png";
 import micIcon from "../../assets/tabs/mic_on.png";
 import noSpeakerIcon from "../../assets/tabs/no_speaker.png";
 import speakerIcon from "../../assets/tabs/speaker.png";
