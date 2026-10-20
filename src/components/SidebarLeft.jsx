@@ -13,6 +13,11 @@ import {
   FLYR_USER_ID,
   isFlyrChat,
 } from "../utils/flyr";
+import requestsIcon from "../assets/tabs/requests.png";
+import requestsIconSelected from "../assets/tabs/requests-selected.png";
+import calendarIcon from "../assets/tabs/calendar.png";
+import calendarIconSelected from "../assets/tabs/calendar-selected.png";
+
 
 
 
@@ -429,7 +434,13 @@ const filteredChats = normalChats.filter((c) =>
   className={`tab-btn ${currentTab === "Requests" ? "active" : ""}`}
   onClick={() => setCurrentTab("Requests")}
 >
-  <span className="tab-icon">👤</span>
+ 
+<img
+  className="tab-icon"
+  src={currentTab === "Requests" ? requestsIconSelected : requestsIcon}
+  alt="Requests"
+/>
+
   <span className="tab-label">Requests</span>
 
   {incomingRequests.length > 0 && (
@@ -442,7 +453,13 @@ const filteredChats = normalChats.filter((c) =>
   className={`tab-btn ${currentTab === "Calendar" ? "active" : ""}`}
   onClick={() => setCurrentTab("Calendar")}
 >
-  <span className="tab-icon">🗓️</span>
+  
+<img
+  className="tab-icon"
+  src={currentTab === "Calendar" ? calendarIconSelected : calendarIcon}
+  alt="Calendar"
+/>
+
   <span className="tab-label">Calendar</span>
 </button>
 
