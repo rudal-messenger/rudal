@@ -7,6 +7,8 @@ import {
 } from "./webrtc";
 import "./CallOverlay.css";
 import { supabase } from "../../supabaseClient";
+import hangupIcon from "../../assets/tabs/hangup_phone.png";
+
 
 
 function formatTime(seconds) {
@@ -461,7 +463,9 @@ useEffect(() => {
             - Incoming BEFORE accept: do NOT show (you requested that) */}
         {callPhase === "ringing_out" && (
           <button className="rudal-hangup-btn" onClick={cancelOutgoing} title="Cancel">
-            📞
+            
+<img src={hangupIcon} alt="" className="rudal-hangup-icon" />
+
           </button>
         )}
 
