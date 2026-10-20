@@ -8,8 +8,8 @@ import {
 import "./CallOverlay.css";
 import { supabase } from "../../supabaseClient";
 import hangupIcon from "../../assets/tabs/hangup_phone.png";
-import cameraIcon from "../../assets/tabs/camera_on.png";
-import cameraIconSelected from "../../assets/tabs/camera_off.png";
+import cameraIcon from "../../assets/tabs/camera_off.png";
+import cameraIconSelected from "../../assets/tabs/camera_on.png";
 import mutedMicIcon from "../../assets/tabs/mic_off.png";
 import micIcon from "../../assets/tabs/mic_on.png";
 import noSpeakerIcon from "../../assets/tabs/no_speaker.png";
