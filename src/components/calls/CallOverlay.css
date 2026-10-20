@@ -612,3 +612,11 @@
   z-index: 5;
   margin: 0;
 }
+
+.rudal-hangup-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+  margin: auto;
+}
