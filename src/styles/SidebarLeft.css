@@ -1676,3 +1676,11 @@
   object-fit: contain;
 }
 
+
+.dialpad-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+}
+
