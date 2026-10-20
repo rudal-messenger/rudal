@@ -1669,9 +1669,10 @@
 }
 
 
-/* Enlarge Requests and Calendar icons only */
+
 .tab-btn:nth-child(3) .tab-icon,
 .tab-btn:nth-child(4) .tab-icon {
-  transform: scale(2.5);
+  transform: scale(1.8);
   object-fit: contain;
 }
+
