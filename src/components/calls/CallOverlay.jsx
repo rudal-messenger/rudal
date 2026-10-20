@@ -8,6 +8,12 @@ import {
 import "./CallOverlay.css";
 import { supabase } from "../../supabaseClient";
 import hangupIcon from "../../assets/tabs/hangup_phone.png";
+import cameraIcon from "../../assets/tabs/camera.png";
+import cameraIconSelected from "../../assets/tabs/camera-selected.png";
+import mutedMicIcon from "../../assets/tabs/mic-muted.png";
+import micIcon from "../../assets/tabs/mic.png";
+import noSpeakerIcon from "../../assets/tabs/no-speaker.png";
+import speakerIcon from "../../assets/tabs/speaker.png";
 
 
 
@@ -48,6 +54,8 @@ useEffect(() => {
   return () => clearInterval(interval);
 }, []);
 
+  const [hasSpeaker, setHasSpeaker] = useState(true);
+
 const [minimized, setMinimized] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [muted, setMuted] = useState(false);
@@ -73,6 +81,39 @@ const displayedCall = incomingCall || activeCall;
 const displayedCallId = displayedCall?.id;
 const callerId = displayedCall?.caller_id;
 const calleeId = displayedCall?.callee_id;
+
+  useEffect(() => {
+  let mounted = true;
+
+  async function detectSpeakers() {
+    try {
+      if (!navigator.mediaDevices?.enumerateDevices) {
+        if (mounted) setHasSpeaker(true);
+        return;
+      }
+
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const outputs = devices.filter((device) => device.kind === "audiooutput");
+
+      if (mounted) {
+        setHasSpeaker(outputs.length > 0);
+      }
+    } catch (err) {
+      console.error("Failed to detect speakers:", err);
+      if (mounted) setHasSpeaker(true);
+    }
+  }
+
+  detectSpeakers();
+
+  const handleDeviceChange = () => detectSpeakers();
+  navigator.mediaDevices?.addEventListener?.("devicechange", handleDeviceChange);
+
+  return () => {
+    mounted = false;
+    navigator.mediaDevices?.removeEventListener?.("devicechange", handleDeviceChange);
+  };
+}, []);
 
 useEffect(() => {
   let cancelled = false;
@@ -435,7 +476,11 @@ useEffect(() => {
           onClick={toggleMute}
           disabled={callPhase !== "in_call"} // only in call
         >
-          🎙️
+          <img
+  src={muted ? mutedMicIcon : micIcon}
+  alt=""
+  className="rudal-control-icon"
+/>
         </button>
 
         <button
@@ -443,19 +488,27 @@ useEffect(() => {
   onClick={() => toggleVideo()}
   title="Toggle camera"
 >
-  📷
+  <img
+    src={cameraEnabled ? cameraIconSelected : cameraIcon}
+    alt=""
+    className="rudal-control-icon"
+  />
 </button>
 
         {/* Speaker */}
         <button
-          className="rudal-round-btn"
-          title="Speaker"
-          aria-label="Speaker"
-          onClick={loadOutputs}
-          disabled={callPhase !== "in_call"}
-        >
-          🔊
-        </button>
+  className="rudal-round-btn"
+  title="Speaker"
+  aria-label="Speaker"
+  onClick={loadOutputs}
+  disabled={callPhase !== "in_call"}
+>
+  <img
+    src={hasSpeaker ? speakerIcon : noSpeakerIcon}
+    alt=""
+    className="rudal-control-icon"
+  />
+</button>
 
         {/* BIG RED BUTTON:
             - Outgoing: Cancel
