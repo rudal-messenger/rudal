@@ -624,19 +624,27 @@ const startScreenShare = async () => {
 />
         </button>
 
-        <button
-  className="rudal-round-btn"
-  onClick={() => toggleVideo()}
-  title="Toggle camera"
+        
+<button
+  className={`rudal-round-btn ${
+    isScreenSharing ? "camera-disabled" : ""
+  }`}
+  onClick={toggleVideo}
+  disabled={isScreenSharing || callPhase !== "in_call"}
+  title={
+    isScreenSharing
+      ? "Camera unavailable while sharing screen"
+      : "Toggle camera"
+  }
+  aria-label="Toggle camera"
 >
   <img
-    
-src={videoEnabled ? cameraIconSelected : cameraIcon}
-
+    src={videoEnabled ? cameraIconSelected : cameraIcon}
     alt=""
     className="rudal-control-icon"
   />
 </button>
+
 
         {/* Speaker */}
         <button

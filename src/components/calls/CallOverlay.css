@@ -628,3 +628,12 @@
   display: block;
   margin: auto;
 }
+
+
+/* Camera unavailable while sharing screen */
+.rudal-round-btn.camera-disabled {
+  opacity: 0.35;
+  filter: grayscale(100%);
+  cursor: not-allowed;
+  pointer-events: none;
+}
