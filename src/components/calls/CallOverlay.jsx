@@ -14,6 +14,8 @@ import mutedMicIcon from "../../assets/tabs/mic_off.png";
 import micIcon from "../../assets/tabs/mic_on.png";
 import noSpeakerIcon from "../../assets/tabs/no_speaker.png";
 import speakerIcon from "../../assets/tabs/speaker.png";
+import React, { useEffect, useMemo, useState, useRef } from "react";
+
 
 
 
@@ -60,6 +62,15 @@ const [minimized, setMinimized] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [muted, setMuted] = useState(false);
   const [videoEnabled, setVideoEnabled] = useState(false);
+
+
+
+const [isScreenSharing, setIsScreenSharing] = useState(false);
+const screenStreamRef = useRef(null);
+const screenSenderRef = useRef(null);
+const originalVideoTrackRef = useRef(null);
+const cameraBeforeShareRef = useRef(false);
+
 
   // Speaker selection UI
   const [speakerOpen, setSpeakerOpen] = useState(false);
@@ -235,6 +246,137 @@ useEffect(() => {
     setMinimized(false);
   }
 }, [callPhase]);
+
+
+const notifyVideoState = (enabled) => {
+  const pc = pcRef.current;
+  if (!pc) return;
+
+  pc.rudalLocalCameraEnabled = enabled;
+
+  const channel = pc.rudalCameraChannel;
+
+  if (channel?.readyState === "open") {
+    channel.send(JSON.stringify({
+      cameraEnabled: enabled,
+    }));
+  }
+};
+
+const stopScreenShare = async () => {
+  const stream = screenStreamRef.current;
+  if (!stream) return;
+
+  screenStreamRef.current = null;
+
+  const sender = screenSenderRef.current;
+  const cameraTrack = originalVideoTrackRef.current;
+  const restoreCamera = cameraBeforeShareRef.current;
+
+  screenSenderRef.current = null;
+  originalVideoTrackRef.current = null;
+
+  stream.getTracks().forEach((track) => {
+    track.onended = null;
+  });
+
+  try {
+    if (sender && cameraTrack?.readyState === "live") {
+      cameraTrack.enabled = restoreCamera;
+      await sender.replaceTrack(cameraTrack);
+    }
+
+    notifyVideoState(restoreCamera);
+
+    const preview = document.getElementById("rudal-local-video");
+    if (preview) {
+      preview.srcObject = localStreamRef.current;
+    }
+  } catch (error) {
+    console.error("[SCREEN] Restore failed:", error);
+  } finally {
+    stream.getTracks().forEach((track) => track.stop());
+    setIsScreenSharing(false);
+  }
+};
+
+const startScreenShare = async () => {
+  if (callPhase !== "in_call") return;
+
+  const pc = pcRef.current;
+
+  if (!pc || pc.connectionState !== "connected") {
+    alert("Wait until the call is connected.");
+    return;
+  }
+
+  if (!navigator.mediaDevices?.getDisplayMedia) {
+    alert("Screen sharing is not supported in this browser.");
+    return;
+  }
+
+  const sender = pc.getSenders().find(
+    (sender) => sender.track?.kind === "video"
+  );
+
+  if (!sender) {
+    alert("No video sender available.");
+    return;
+  }
+
+  let stream;
+
+  try {
+    stream = await navigator.mediaDevices.getDisplayMedia({
+      video: {
+        frameRate: { ideal: 30, max: 30 },
+      },
+      audio: false,
+    });
+
+    const screenTrack = stream.getVideoTracks()[0];
+
+    if (!screenTrack) {
+      stream.getTracks().forEach((track) => track.stop());
+      return;
+    }
+
+    const cameraTrack = sender.track;
+
+    cameraBeforeShareRef.current = videoEnabled;
+
+    await sender.replaceTrack(screenTrack);
+
+    screenSenderRef.current = sender;
+    originalVideoTrackRef.current = cameraTrack;
+    screenStreamRef.current = stream;
+
+    notifyVideoState(true);
+    setIsScreenSharing(true);
+
+    const preview = document.getElementById("rudal-local-video");
+
+    if (preview) {
+      preview.srcObject = stream;
+      preview.play().catch(() => {});
+    }
+
+    screenTrack.onended = () => {
+      void stopScreenShare();
+    };
+
+    console.log("[SCREEN] Screen sharing started");
+  } catch (error) {
+    stream?.getTracks().forEach((track) => track.stop());
+
+    if (error.name !== "NotAllowedError") {
+      console.error("[SCREEN] Sharing failed:", error);
+      alert(`Screen sharing failed: ${error.message}`);
+    }
+  }
+};
+
+
   if (!show) return null;
 
   // ---- MIC TOGGLE ----
@@ -511,6 +653,33 @@ src={videoEnabled ? cameraIconSelected : cameraIcon}
     className="rudal-control-icon"
   />
 </button>
+
+
+{callPhase === "in_call" && (
+  <button
+    type="button"
+    className={`rudal-round-btn ${
+      isScreenSharing ? "screen-sharing-active" : ""
+    }`}
+    onClick={() => {
+      if (isScreenSharing) {
+        void stopScreenShare();
+      } else {
+        void startScreenShare();
+      }
+    }}
+    title={isScreenSharing ? "Stop sharing" : "Share screen"}
+    aria-label={isScreenSharing ? "Stop sharing" : "Share screen"}
+    aria-pressed={isScreenSharing}
+  >
+    {isScreenSharing ? (
+      <icon-placeholder />
+    ) : (
+      <icon-placeholder />
+    )}
+  </button>
+)}
+
 
         {/* BIG RED BUTTON:
             - Outgoing: Cancel
