@@ -17,6 +17,8 @@ import requestsIcon from "../assets/tabs/requests.png";
 import requestsIconSelected from "../assets/tabs/requests-selected.png";
 import calendarIcon from "../assets/tabs/calendar.png";
 import calendarIconSelected from "../assets/tabs/calendar-selected.png";
+import keypadIcon from "../assets/tabs/keypad.png";
+
 
 
 
@@ -396,12 +398,19 @@ const filteredChats = normalChats.filter((c) =>
     onChange={(e) => setSearchText(e.target.value)}
   />
 
-  <button
-    className="dialpad-btn"
-    onClick={onOpenDialPad}
-  >
-    ⠿
-  </button>
+  
+<button
+  className="dialpad-btn"
+  onClick={onOpenDialPad}
+  aria-label="Open dialpad"
+>
+  <img
+    src={keypadIcon}
+    alt=""
+    className="dialpad-icon"
+  />
+</button>
+
 </div>
 
       {/* ===== TABS ===== */}
