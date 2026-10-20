@@ -489,7 +489,9 @@ useEffect(() => {
   title="Toggle camera"
 >
   <img
-    src={cameraEnabled ? cameraIconSelected : cameraIcon}
+    
+src={videoEnabled ? cameraIconSelected : cameraIcon}
+
     alt=""
     className="rudal-control-icon"
   />
