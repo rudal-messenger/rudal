@@ -468,12 +468,17 @@ useEffect(() => {
 
           </button>
         )}
+          
+{(callPhase === "in_call" || callPhase === "connecting") && (
+  <button className="rudal-hangup-btn" onClick={hangup} title="End call">
+    <img
+      src={hangupIcon}
+      alt=""
+      className="rudal-hangup-icon"
+    />
+  </button>
+)}
 
-        {(callPhase === "in_call" || callPhase === "connecting") && (
-          <button className="rudal-hangup-btn" onClick={hangup} title="End call">
-            📞
-          </button>
-        )}
 
         {/* Incoming accept/decline pills */}
         {callPhase === "ringing_in" && (
