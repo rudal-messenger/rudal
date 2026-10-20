@@ -3426,3 +3426,49 @@ body.dark-mode .settings-sidebar button.active {
     object-fit: contain;
   }
 }
+
+
+@media (max-width: 760px) {
+
+  /* Resize the open chat to the visible screen */
+  .rudal-shell.mobile-chat-open {
+    top: var(--chat-viewport-top, 0px);
+    bottom: auto;
+
+    height: var(--chat-viewport-height, 100dvh);
+    max-height: var(--chat-viewport-height, 100dvh);
+
+    overflow: hidden;
+  }
+
+  /* Chat fills remaining space */
+  .rudal-shell.mobile-chat-open > .chat-area {
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .rudal-shell.mobile-chat-open .chat-window {
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* Messages shrink and remain scrollable */
+  .rudal-shell.mobile-chat-open .messages-container {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+  }
+
+  /* Composer remains above the keyboard */
+  .rudal-shell.mobile-chat-open .input-bar {
+    flex: 0 0 auto;
+    position: relative;
+    z-index: 5;
+  }
+}
+
+
+
