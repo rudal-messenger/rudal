@@ -30,6 +30,11 @@ import chatIcon from "../assets/tabs/chat.png";
 import chatIconSelected from "../assets/tabs/chat-selected.png";
 import callsIcon from "../assets/tabs/calls.png";
 import callsIconSelected from "../assets/tabs/calls-selected.png";
+import requestsIcon from "../assets/tabs/requests.png";
+import requestsIconSelected from "../assets/tabs/requests-selected.png";
+import calendarIcon from "../assets/tabs/calendar.png";
+import calendarIconSelected from "../assets/tabs/calendar-selected.png";
+
 
 
 
@@ -1333,8 +1338,18 @@ const handleDialCall = async (number) => {
       icon: callsIcon,
       selectedIcon: callsIconSelected,
     },
-    { tab: "Requests", symbol: "👤" },
-    { tab: "Calendar", symbol: "🗓️" },
+    
+{
+  tab: "Requests",
+  icon: requestsIcon,
+  selectedIcon: requestsIconSelected,
+},
+{
+  tab: "Calendar",
+  icon: calendarIcon,
+  selectedIcon: calendarIconSelected,
+},
+
   ].map(({ tab, icon, selectedIcon, symbol }) => (
     <button
       key={tab}
